@@ -5,11 +5,11 @@ import logo from "../../image/logo.png";
 const Navbar = () => {
   // const src =
   return (
-    <header className="flex items-center justify-between pt-4">
+    <header className="flex items-center justify-between pt-3 pb-2">
       <Link to="/" className="px-2 lg:px-0">
         <img className="w-[360px] h-[160px]" src={logo} />
       </Link>
-      <ul className="inline-flex items-center pt-9">
+      <ul className="inline-flex items-center pt-16">
         <li className="px-2 md:px-4">
           <Link
             to="/"

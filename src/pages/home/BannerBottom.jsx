@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react'
 
-const Banner = () => {
+const BannerBottom = () => {
   return (
-    <div className="block md:flex md:space-x-2 px-2 lg:p-0">
+    <div className="my-7 md:flex md:space-x-2 px-2 lg:p-0">
       <a
-        className="mb-4 md:mb-0 w-full md:w-2/3 relative rounded inline-block"
+        className="mr-5 mb-4 md:mb-0 w-full md:w-2/3 relative rounded inline-block"
         style={{ height: "24em" }}
         href="#"
       >
@@ -46,7 +46,7 @@ const Banner = () => {
       </a>
 
       <a
-        className="w-full md:w-1/3 relative rounded"
+        className="w-full pb-10 md:w-1/3 relative rounded"
         style={{ height: "24em" }}
         href="#"
       >
@@ -86,7 +86,7 @@ const Banner = () => {
         </div>
       </a>
     </div>
-  );
-};
+  )
+}
 
-export default Banner;
+export default BannerBottom
