@@ -1,39 +1,34 @@
 import "./App.css";
-import Footer from "./components/Footer";
 
+import CarouselNavigation from "./pages/home/CarouselNavigation";
+import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { Outlet } from "react-router-dom";
-import CarouselNavigation from "./pages/home/CarouselNavigation";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 function App() {
   return (
-    <>
-      <div className="max-w-screen-xl mx-auto px-2">
+    <Provider store={store}>
+      <>
         <Navbar />
-      </div>
-      <div className="max-w-screen bg-gray-50">
-        <div className="pb-5">
-          <CarouselNavigation />
-        </div>
-      </div>
-      <div className="max-w-screen bg-gray-50">
-        <div className="max-w-screen-xl mx-auto px-2">
-          <main className="mx-3 min-h-screen pb-5">
+        <div className="max-w-screen mx-auto bg-gray-50">
+          <main className="min-h-screen pb-5">
             <Outlet />
           </main>
         </div>
-      </div>
-      <div className="max-w-screen-xl mx-auto px-5">
-        <Footer />
-      </div>
-      <div className="max-w-screen mx-auto bg-gray-400 text-black-100 h-10">
-        <div className="max-w-screen-xl mx-auto">
-          <span className="inline-block align-middle font-bold px-9 py-2">
-            Copyright by @VHT, since 2024
-          </span>
+        <div className="max-w-screen-xl mx-auto px-5">
+          <Footer />
         </div>
-      </div>
-    </>
+        <div className="max-w-screen mx-auto bg-gray-400 text-black-100 h-10">
+          <div className="max-w-screen-xl mx-auto text-center">
+            <span className="inline-block align-middle font-bold px-9 py-2">
+              © 2024 by Tran Van Huy. Powered and secured by @TVH
+            </span>
+          </div>
+        </div>
+      </>
+    </Provider>
   );
 }
 

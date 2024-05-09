@@ -1,77 +1,127 @@
+import React, { useState } from "react";
+
+import { CiMenuBurger } from "react-icons/ci";
 import { Link } from "react-router-dom";
-import React from "react";
 import logo from "../../image/logo.png";
 
 const Navbar = () => {
-  // const src =
+  const aboutMeId = 1;
+  const momentId = 2;
+  const sportId = 5;
+  const musicId = 4;
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsOpenMenu(!isOpenMenu);
+  };
+
   return (
-    <header className="flex items-center justify-between pt-3 pb-2">
-      <Link to="/" className="px-2 lg:px-0">
-        <img className="w-[360px] h-[160px]" src={logo} />
-      </Link>
-      <ul className="inline-flex items-center pt-16">
-        <li className="px-2 md:px-4">
+    <header className="bg-white w-full px-6 py-3 z-50 fixed top-0 shadow-md transition-all transform ease-in-out duration-500">
+      <div className="max-w-7xl mx-auto flex items-center flex-wrap justify-between">
+        <div className="sm:mr-8">
+          <Link to="/" className="flex items-center">
+            <img className="w-64 h-24" src={logo} />
+          </Link>
+        </div>
+        <div
+          id="menu-toggle"
+          className="flex items-center md:hidden text-slate-700 hover:text-teal-600 cursor-pointer sm:ml-6"
+          onClick={toggleMobileMenu}
+        >
+          <CiMenuBurger />
+        </div>
+        {isOpenMenu && (
+          <nav className="md:hidden w-full mt-2 pt-6">
+            <Link
+              to="/"
+              className="block font-medium text-slate-700 hover:text-teal-600 text-base mb-2"
+            >
+              Home
+            </Link>
+            <Link
+              to={`about-me/${aboutMeId}`}
+              className="block font-medium text-slate-700 hover:text-teal-600 text-base mb-2"
+            >
+              About Me
+            </Link>
+            <Link
+              to={`moment/${momentId}`}
+              className="block font-medium text-slate-700 hover:text-teal-600 text-base mb-2"
+            >
+              Khoảnh khắc
+            </Link>
+            <Link
+              to={`sport/${sportId}`}
+              className="block font-medium text-slate-700 hover:text-teal-600 text-base mb-2"
+            >
+              Thể thao
+            </Link>
+            <Link
+              to={`music/${musicId}`}
+              className="block font-medium text-slate-700 hover:text-teal-600 text-base mb-2"
+            >
+              Âm nhạc
+            </Link>
+            <form action="/search" className="mb-4 block">
+              <input
+                type="text"
+                id="header-searchbox"
+                name="q"
+                placeholder="Search here ..."
+                className="search-input w-full bg-slate-200 border border-transparent focus:bg-white focus:border-slate-300 focus:outline-none h-8 p-4 placeholder-slate-500 rounded text-slate-700 text-sm"
+              />
+            </form>
+          </nav>
+        )}
+        <nav className="order-last md:order-none items-center flex-grow w-full md:w-auto md:flex hidden mt-2 pt-6 md:mt-0">
           <Link
             to="/"
-            className="text-gray-500 font-semibold hover:text-green-700"
+            className="block mt-4 md:inline-block md:mt-0 font-medium text-slate-700 hover:text-teal-600 text-base mr-4"
           >
             {" "}
             Home{" "}
           </Link>
-        </li>
-        <li className="px-2 md:px-4">
-          <a
-            href="#"
-            className="text-gray-500 font-semibold hover:text-green-700"
-          >
-            {" "}
-            About{" "}
-          </a>
-        </li>
-        <li className="px-2 md:px-4">
-          <a
-            href="#"
-            className="text-gray-500 font-semibold hover:text-green-700"
-          >
-            {" "}
-            Press{" "}
-          </a>
-        </li>
-        <li className="px-2 md:px-4">
-          <a
-            href="#"
-            className="text-gray-500 font-semibold hover:text-green-700"
-          >
-            {" "}
-            Contact{" "}
-          </a>
-        </li>
-        <li className="px-2 md:px-4">
           <Link
-            to="https://www.facebook.com/vhuytran.2610/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mr-2"
+            to={`about-me/${aboutMeId}`}
+            className="block mt-4 md:inline-block md:mt-0 font-medium text-slate-700 hover:text-teal-600 text-base mr-4"
           >
-            <i className="fab fa-facebook-square text-xl hover:text-green-700 text-gray-500 sm:text-xl md:text-2xl"></i>
+            About Me
           </Link>
           <Link
-            to="https://www.instagram.com/vhuy.tran/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mr-2"
+            to={`moment/${momentId}`}
+            className="block mt-4 md:inline-block md:mt-0 font-medium text-slate-700 hover:text-teal-600 text-base mr-4"
           >
-            <i className="fab fa-instagram-square text-xl hover:text-green-700 text-gray-500 sm:text-xl md:text-2xl"></i>
+            {" "}
+            Khoảnh khắc{" "}
           </Link>
           <Link
-            to="https://www.threads.net/@vhuy.tran"
-            target="_blank"
-            rel="noopener noreferrer"
+            to={`sport/${sportId}`}
+            className="block mt-4 md:inline-block md:mt-0 font-medium text-slate-700 hover:text-teal-600 text-base mr-4"
           >
-            <i className="fa-brands fa-square-threads text-xl hover:text-green-700 text-gray-500 sm:text-xl md:text-2xl"></i>
+            {" "}
+            Thể thao{" "}
           </Link>
-        </li>
-      </ul>
+          <Link
+            to={`music/${musicId}`}
+            className="block mt-4 md:inline-block md:mt-0 font-medium text-slate-700 hover:text-teal-600 text-base mr-4"
+          >
+            {" "}
+            Âm nhạc{" "}
+          </Link>
+        </nav>
+        <form
+          action="{{ '/search' | url }}"
+          className="order-last md:order-none flex-grow items-center justify-end md:block hidden mt-6 pt-4 md:mt-0 md:mr-5"
+        >
+          <input
+            type="text"
+            id="header-searchbox"
+            name="q"
+            placeholder="Search here ..."
+            className="w-full sm:max-w-xs bg-slate-200 border border-transparent float-right focus:bg-white focus:border-slate-300 focus:outline-none h-8 p-4 placeholder-slate-500 rounded text-slate-700 text-sm"
+          />
+        </form>
+      </div>
     </header>
   );
 };

@@ -1,117 +1,157 @@
-import PostCards from "../blogs/PostCards";
-import React from "react";
-import BannerTop from "./BannerTop";
-import BannerBottom from "./BannerBottom";
-import BannerLeft from "./BannerLeft";
-import BannerRight from "./BannerRight";
+import {
+  FaFacebookSquare,
+  FaInstagramSquare,
+  FaRegPauseCircle,
+  FaYoutube,
+} from "react-icons/fa";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import Avatar from "../../components/Avatar";
+import ButtonScrollToTop from "../../components/ButtonScrollToTop";
+import CarouselNavigation from "./CarouselNavigation";
+import { FaSquareThreads } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+import Marquee from "react-fast-marquee";
+import { MdSkipNext } from "react-icons/md";
+import { MdSkipPrevious } from "react-icons/md";
+import MomentCard from "../../components/MomentCard";
+import MusicCard from "../../components/MusicCard";
+import SportCard from "../../components/SportCard";
+import { getExtraImg } from "../../redux/features/extraImages/extraImgSlice";
+import RecentPost from "../../components/RecentPost";
 
 const Home = () => {
+  const aboutMeId = 1;
+  const momentId = 2;
+  const sportId = 5;
+  const musicId = 4;
+
   return (
     <div>
       <main>
-        {/* banner */}
-        {/* <BannerTop /> */}
-
-        {/* banner */}
-        {/* <BannerBottom /> */}
-
-        <div
-          className="md:flex md:space-x-2 px-2 lg:p-0"
-        >
-          <div className="mx-3 w-full md:w-2/3 relative">
-            <BannerLeft />
-          </div>
-          <div className="w-full md:w-1/3 relative">
-            <BannerRight />
+        <div className="max-w-screen">
+          <div className="pt-28">
+            <CarouselNavigation />
           </div>
         </div>
 
-        {/* <div className="block lg:flex lg:space-x-2 px-2 lg:p-0 mt-10 mb-10"> */}
-          {/* post cards */}
-          {/* <PostCards /> */}
+        <div className="px-5 max-w-screen-xl mx-auto">
+          <div className="flex flex-wrap justify-between pt-5">
+            {/* <!--1/2 col --> */}
+            <div className="w-full md:w-1/2 p-4 flex flex-col flex-grow flex-shrink">
+              <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
+                <div className="flex flex-wrap no-underline hover:no-underline">
+                  <div className="w-full font-bold text-2xl text-gray-900 pt-6 text-center">
+                    Khoảnh Khắc
+                  </div>
+                  <MomentCard categoryId={momentId} />
+                  <div className="flex justify-center items-center w-full pt-2 pb-6">
+                    <Link
+                      to={`moment/${momentId}`}
+                      className="text-green-700 hover:text-white border border-green-700 hover:bg-green-600  font-medium text-md px-5 py-2.5 text-center me-2 mb-2"
+                    >
+                      Read More
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          {/* right sidebar */}
-          {/* <div className="w-full lg:w-1/3 px-3"> */}
-            {/* topics */}
-            {/* <div className="mb-4">
-              <h5 className="font-bold text-lg uppercase text-gray-700 px-1 mb-2">
-                {" "}
-                Popular Topics{" "}
-              </h5>
-              <ul>
-                <li className="px-1 py-4 border-b border-t border-white hover:border-gray-200 transition duration-300">
-                  <a
-                    href="#"
-                    className="flex items-center text-gray-600 cursor-pointer"
-                  >
-                    <span className="inline-block h-4 w-4 bg-green-300 mr-3"></span>
-                    Nutrition
-                    <span className="text-gray-500 ml-auto">23 articles</span>
-                    <i className="text-gray-500 bx bx-right-arrow-alt ml-1"></i>
-                  </a>
-                </li>
-                <li className="px-1 py-4 border-b border-t border-white hover:border-gray-200 transition duration-300">
-                  <a
-                    href="#"
-                    className="flex items-center text-gray-600 cursor-pointer"
-                  >
-                    <span className="inline-block h-4 w-4 bg-indigo-300 mr-3"></span>
-                    Food & Diet
-                    <span className="text-gray-500 ml-auto">18 articles</span>
-                    <i className="text-gray-500 bx bx-right-arrow-alt ml-1"></i>
-                  </a>
-                </li>
-                <li className="px-1 py-4 border-b border-t border-white hover:border-gray-200 transition duration-300">
-                  <a
-                    href="#"
-                    className="flex items-center text-gray-600 cursor-pointer"
-                  >
-                    <span className="inline-block h-4 w-4 bg-yellow-300 mr-3"></span>
-                    Workouts
-                    <span className="text-gray-500 ml-auto">34 articles</span>
-                    <i className="text-gray-500 bx bx-right-arrow-alt ml-1"></i>
-                  </a>
-                </li>
-                <li className="px-1 py-4 border-b border-t border-white hover:border-gray-200 transition duration-300">
-                  <a
-                    href="#"
-                    className="flex items-center text-gray-600 cursor-pointer"
-                  >
-                    <span className="inline-block h-4 w-4 bg-blue-300 mr-3"></span>
-                    Immunity
-                    <span className="text-gray-500 ml-auto">9 articles</span>
-                    <i className="text-gray-500 bx bx-right-arrow-alt ml-1"></i>
-                  </a>
-                </li>
-              </ul>
-            </div> */}
+            {/* <!--1/2 col --> */}
+            <div className="w-full md:w-1/2 p-4 flex flex-col flex-grow flex-shrink">
+              <div className="flex-1 flex-row bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
+                <div className="flex flex-wrap no-underline hover:no-underline">
+                  <div className="w-full font-bold text-2xl text-gray-900 pt-6 text-center">
+                    Thể Thao
+                  </div>
+                  <div className="flex justify-center items-center w-full h-96">
+                    <SportCard categoryId={sportId} />
+                  </div>
+                  <div className="flex justify-center items-center w-full pt-2 pb-6">
+                    <Link
+                      to={`sport/${sportId}`}
+                      className="text-green-700 hover:text-white border border-green-700 hover:bg-green-600  font-medium text-md px-5 py-2.5 text-center me-2 mb-2"
+                    >
+                      Read More
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-            {/* divider */}
-            {/* <div className="border border-dotted"></div> */}
+            {/* <!--1/3 col --> */}
+            <div className="w-full md:w-1/3 p-4 flex flex-col flex-grow flex-shrink">
+              <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
+                <Link
+                  to={`music/${musicId}`}
+                  className="flex flex-wrap no-underline hover:no-underline"
+                >
+                  <div className="w-full font-bold text-2xl text-gray-900 pt-6 text-center">
+                    Âm Nhạc
+                  </div>
+                  <div className="pt-6 pb-6 flex justify-center items-center w-full">
+                    <MusicCard />
+                  </div>
+                  <div className="px-11">
+                    <Marquee pauseOnClick speed={10}>
+                      <div className="w-full font-bold text-lg text-gray-900 pr-2">
+                        Tran Van Huy - Âm Nhạc Của Huy (Official Video)
+                      </div>
+                    </Marquee>
+                    <div className="w-full text-md text-gray-900 pr-2 pb-6">
+                      Tran Van Huy
+                    </div>
+                    <div className="relative flex flex-no-wrap items-center pb-4">
+                      <p>00:00</p>
+                      <hr className="border-gray-300 border-2 w-full mx-2" />
+                      <p>00:00</p>
+                    </div>
+                    <div className="relative flex flex-no-wrap justify-center items-center pb-6">
+                      <MdSkipPrevious size={40} />
+                      <FaRegPauseCircle size={50} className="mx-5" />
+                      <MdSkipNext size={40} />
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </div>
 
-            {/* subscribe */}
-            {/* <div className="p-1 mt-4 mb-4">
-              <h5 className="font-bold text-lg uppercase text-gray-700 mb-2">
-                {" "}
-                Subscribe{" "}
-              </h5>
-              <p className="text-gray-600">
-                Subscribe to our newsletter. We deliver the best health-related
-                articles to your inbox
-              </p>
-              <input
-                placeholder="your email address"
-                className="text-gray-700 bg-gray-100 rounded-t hover:outline-none p-2 w-full mt-4 border"
-              />
-              <button className="px-4 py-2 bg-indigo-600 text-gray-200 rounded-b w-full capitalize tracking-wide">
-                Subscribe
-              </button>
-            </div> */}
+            {/* <!--1/3 col --> */}
+            <div className="w-full md:w-1/3 p-4 flex flex-col flex-grow flex-shrink">
+              <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
+                <div className="flex flex-wrap no-underline hover:no-underline">
+                  <div className="flex justify-center items-center w-full pt-10 pb-8">
+                    <Avatar width={40} height={40} />
+                  </div>
+                  <p className="w-full text-gray-800 font-bold text-xl text-center mb-8">
+                    Xin chào! Tôi là Huy!
+                  </p>
+                  <hr className="border-orange-800 border-2 w-full mx-32 rounded mb-8" />
+                  <p className="text-gray-800 text-base text-justify px-11 pb-6">
+                    Chào mọi người! Tôi là Huy, người đứng sau những dòng chữ ở
+                    đây. Chào mừng các bạn đến với thế giới nhỏ của tôi!
+                  </p>
+                </div>
+                <div className="flex justify-center items-center w-full pt-2 pb-6">
+                  <Link
+                    to={`about-me/${aboutMeId}`}
+                    className="text-green-700 hover:text-white border border-green-700 hover:bg-green-600  font-medium text-md px-5 py-2.5 text-center me-2 mb-2"
+                  >
+                    Read More
+                  </Link>
+                </div>
+              </div>
+            </div>
 
-            {/* divider */}
-            {/* <div className="border border-dotted"></div>
+            {/* <!--1/3 col --> */}
+            <div className="w-full md:w-1/3 p-4 flex flex-col flex-grow flex-shrink">
+              <RecentPost />
+            </div>
           </div>
-        </div> */}
+        </div>
+
+        <ButtonScrollToTop />
       </main>
     </div>
   );
