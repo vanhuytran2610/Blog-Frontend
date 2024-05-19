@@ -56,7 +56,7 @@ const Navbar = () => {
       <div className="mx-5 flex items-center flex-wrap">
         <Link
           to="/"
-          className="w-1/2 md:w-1/3"
+          className="w-1/2 md:w-1/6"
           onClick={() => handleLinkClick("home")}
         >
           <img className="w-54 h-16" src={logo} loading="lazy" />
@@ -133,7 +133,7 @@ const Navbar = () => {
             </div>
           </nav>
         )}
-        <nav className="order-last md:order-none items-center flex-grow w-full md:w-auto mx-3 md:flex hidden mt-2 pt-7 md:mt-0">
+        <nav className="order-last md:order-none justify-center items-center flex-grow w-3/6 md:flex hidden mt-2 pt-7 md:mt-0">
           <Link
             to="/"
             onClick={() => handleLinkClick("home")}
@@ -184,11 +184,14 @@ const Navbar = () => {
             Âm nhạc{" "}
           </Link>
         </nav>
-        <div className="order-last md:order-none items-center flex-grow justify-end w-full md:w-auto mx-2 md:flex hidden pt-7 md:mt-0">
+        <div className="order-last md:order-none items-center justify-end w-1/6 mr-1 md:flex hidden pt-7 md:mt-0">
           <Popover placement="bottom-end">
             <PopoverHandler>
               <button>
-                <FaSearch className="hover:fill-green-600" />
+                <div className="flex text-gray-700 hover:text-green-600">
+                  <p className="mx-2 font-medium">Tìm kiếm</p>
+                  <FaSearch className="mt-1" />
+                </div>
               </button>
             </PopoverHandler>
             <PopoverContent className="z-50 rounded-none ml-4">
@@ -206,10 +209,6 @@ const Navbar = () => {
               </div>
             </PopoverContent>
           </Popover>
-        </div>
-        <div className="order-last md:order-none mx-1 md:pt-7 md:flex hidden">
-          <TbWorld size={22} />
-          <p className="font-bold ml-1 text-md">VI</p>
         </div>
       </div>
     </header>
