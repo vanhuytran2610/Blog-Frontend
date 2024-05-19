@@ -21,12 +21,15 @@ const Avatar = ({ width, height }) => {
   return (
     <>
       {isLoading ? (
-        <LoadingSpinner />
+        <div className="flex items-center justify-center mx-auto">
+          <LoadingSpinner />
+        </div>
       ) : !isError && extraImg.data?.length > 0 ? (
         <img
-          src={greetImages[4]?.image_path_url}
+          src={greetImages[0]?.image_path_url}
           className={`h-${height} w-${width} rounded-full object-cover`}
           alt="Author"
+          loading="lazy"
         />
       ) : (
         <div>No image found</div>

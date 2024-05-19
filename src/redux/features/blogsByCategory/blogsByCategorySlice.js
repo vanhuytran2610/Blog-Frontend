@@ -9,10 +9,17 @@ const initialState = {
   error: "",
 };
 
-export const getBlogsByCategoryId = createAsyncThunk("blogs/getBlogsByCategoryId", async (categoryId) => {
-  const blogs = await getBlogsByCategory(categoryId);
-  return blogs;
-});
+export const getBlogsByCategoryId = createAsyncThunk(
+  "blogs/getBlogsByCategoryId",
+  async ({ categoryId, sortBy, sortOrder }) => {
+    const blogs = await getBlogsByCategory({
+      categoryId: categoryId,
+      sortBy: sortBy,
+      sortOrder: sortOrder,
+    });
+    return blogs;
+  }
+);
 
 const blogsByCategorySlice = createSlice({
   name: "blogsByCategory",
@@ -20,7 +27,9 @@ const blogsByCategorySlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getBlogsByCategoryId.pending, (state) => {
-        (state.isError = false), (state.isLoading = true), (state.blogsByCategory = []);
+        (state.isError = false),
+          (state.isLoading = true),
+          (state.blogsByCategory = []);
       })
       .addCase(getBlogsByCategoryId.fulfilled, (state, action) => {
         (state.isLoading = false), (state.blogsByCategory = action.payload);

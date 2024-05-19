@@ -24,23 +24,23 @@ import RecentPost from "../../components/RecentPost";
 const Home = () => {
   const aboutMeId = 1;
   const momentId = 2;
-  const sportId = 5;
+  const sportId = 3;
   const musicId = 4;
 
   return (
     <div>
       <main>
         <div className="max-w-screen">
-          <div className="pt-28">
+          <div className="pt-16">
             <CarouselNavigation />
           </div>
         </div>
 
-        <div className="px-5 max-w-screen-xl mx-auto">
+        <div className="px-5 pt-8 max-w-screen-xl mx-auto">
           <div className="flex flex-wrap justify-between pt-5">
             {/* <!--1/2 col --> */}
             <div className="w-full md:w-1/2 p-4 flex flex-col flex-grow flex-shrink">
-              <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
+              <div className="flex-1 bg-white overflow-hidden shadow-lg border-gray-400 border">
                 <div className="flex flex-wrap no-underline hover:no-underline">
                   <div className="w-full font-bold text-2xl text-gray-900 pt-6 text-center">
                     Khoảnh Khắc
@@ -60,7 +60,7 @@ const Home = () => {
 
             {/* <!--1/2 col --> */}
             <div className="w-full md:w-1/2 p-4 flex flex-col flex-grow flex-shrink">
-              <div className="flex-1 flex-row bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
+              <div className="flex-1 flex-row bg-white overflow-hidden shadow-lg border-gray-400 border">
                 <div className="flex flex-wrap no-underline hover:no-underline">
                   <div className="w-full font-bold text-2xl text-gray-900 pt-6 text-center">
                     Thể Thao
@@ -82,7 +82,7 @@ const Home = () => {
 
             {/* <!--1/3 col --> */}
             <div className="w-full md:w-1/3 p-4 flex flex-col flex-grow flex-shrink">
-              <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
+              <div className="flex-1 bg-white border-gray-400 border overflow-hidden shadow-lg">
                 <Link
                   to={`music/${musicId}`}
                   className="flex flex-wrap no-underline hover:no-underline"
@@ -109,7 +109,7 @@ const Home = () => {
                     </div>
                     <div className="relative flex flex-no-wrap justify-center items-center pb-6">
                       <MdSkipPrevious size={40} />
-                      <FaRegPauseCircle size={50} className="mx-5" />
+                      <FaRegPauseCircle size={50} className="mx-5 hover:fill-green-600" />
                       <MdSkipNext size={40} />
                     </div>
                   </div>
@@ -119,7 +119,7 @@ const Home = () => {
 
             {/* <!--1/3 col --> */}
             <div className="w-full md:w-1/3 p-4 flex flex-col flex-grow flex-shrink">
-              <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
+              <div className="flex-1 bg-white border-gray-400 border overflow-hidden shadow-lg">
                 <div className="flex flex-wrap no-underline hover:no-underline">
                   <div className="flex justify-center items-center w-full pt-10 pb-8">
                     <Avatar width={40} height={40} />

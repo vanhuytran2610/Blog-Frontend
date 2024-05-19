@@ -1,16 +1,8 @@
 import publicAxios from "../../../components/publicAxios";
 
-export const getBlogs = async ({ orderBy, orderSort }) => {
+export const getBlogs = async () => {
   try {
-    const response = await publicAxios.get("/auth/get-blogs", {
-      params: {
-        orderBy: orderBy,
-        orderSort: orderSort,
-      },
-    });
-    console.log(orderBy);
-    console.log(orderSort);
-    console.log(response);
+    const response = await publicAxios.get("/auth/get-blogs");
     return response.data;
   } catch (error) {
     // Handle error

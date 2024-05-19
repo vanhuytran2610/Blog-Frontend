@@ -8,7 +8,8 @@ import ButtonScrollToTop from "../../components/ButtonScrollToTop";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import RelatedPost from "../../components/RelatedPost";
 import { getBlogById } from "../../redux/features/singleBlog/blogSlice";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import YoutubeCard from "../../components/YoutubeCard";
 
 const SingleBlog = () => {
   const { categoryId, id } = useParams();
@@ -22,17 +23,17 @@ const SingleBlog = () => {
     dispatch(getBlogById({ categoryId: categoryId, id: id }));
   }, [dispatch, categoryId, id]);
 
-  console.log(blog?.data?.images[0].image_path_url);
-
   const published_date = new Date(blog?.data?.updated_at);
   const options = { year: "numeric", month: "long", day: "numeric" };
 
-  const formattedDate = published_date.toLocaleDateString("en-US", options);
+  const formattedDate = published_date.toLocaleDateString("vi-VN", options);
 
   return (
     <article className="pt-36">
       {isLoading ? (
-        <LoadingSpinner />
+        <div className="flex items-center justify-center mx-auto">
+          <LoadingSpinner />
+        </div>
       ) : !isError && blog.data ? (
         <div className="px-5 max-w-screen-xl mx-auto">
           {/* <!--titles --> */}
@@ -57,7 +58,7 @@ const SingleBlog = () => {
             style={{
               backgroundImage: `url(${blog.data?.image_avatar_url})`,
               height: "40rem",
-              backgroundPosition: "center bottom",
+              backgroundPosition: "center",
             }}
           ></div>
           {/* <!--Container--> */}
@@ -75,27 +76,72 @@ const SingleBlog = () => {
                 </p>
 
                 <ol className="pt-6 text-justify">
-                  <li className="py-3">{blog.data?.head_content}</li>
+                  <li className="py-3">
+                    {blog.data?.head_content &&
+                      blog.data.head_content.split("\n").map((line, index) => (
+                        <React.Fragment key={index}>
+                          {line}
+                          <br />
+                        </React.Fragment>
+                      ))}
+                  </li>
                   <li className="py-3 px-3 grid grid-cols-2 md:grid-cols-3 grid-rows-3 md:grid-rows-2 gap-y-3 md:gap-y-2">
                     {blog.data?.images.slice(0, 6).map((image, index) => (
                       <li key={index} className="mr-2">
                         <img
-                          src={image.image_path_url}
+                          src={image?.image_path_url}
                           className="object-cover h-48 w-64"
                           alt={`Image ${index}`}
+                          loading="lazy"
                         />
                       </li>
                     ))}
                   </li>
-                  <li className="py-3">{blog.data?.body_content}</li>
+                  <li className="py-3">
+                    {blog.data?.body_content &&
+                      blog.data.body_content.split("\n").map((line, index) => (
+                        <React.Fragment key={index}>
+                          {line}
+                          <br />
+                        </React.Fragment>
+                      ))}
+                  </li>
                   <li className="pt-3 pb-6 px-3 flex justify-center items-center">
                     <img
-                      src={blog.data?.images[6].image_path_url}
+                      src={blog.data?.images[6]?.image_path_url}
                       className="object-cover max-h-96 max-w-96"
                       alt="img"
+                      loading="lazy"
                     />
                   </li>
-                  <li className="">{blog.data?.foot_content}</li>
+                  <li className="pb-6">
+                    {blog.data?.foot_content &&
+                      blog.data.foot_content.split("\n").map((line, index) => (
+                        <React.Fragment key={index}>
+                          {line}
+                          <br />
+                        </React.Fragment>
+                      ))}
+                  </li>
+                  {blog.data?.title?.toLowerCase().includes("cầu lông") && (
+                    <>
+                      <li className="pb-6 h-96 md:h-[500px]">
+                        <YoutubeCard video_url={blog.data?.video_url} />
+                      </li>
+                      <li className="">
+                        Các bạn có thể xem thêm các video về cầu lông{" "}
+                        <Link
+                          to="https://youtube.com/playlist?list=PLa4S6u0VM2JI7U5ES-_VZ5EFhq9oDxsdD&si=1nvNRnuhVC7kOow0"
+                          className="border-b-2 border-gray-900 hover:border-green-600 hover:text-green-600 font-bold"
+                          target="_blank"
+                        >
+                          tại đây
+                        </Link>{" "}
+                        nhé! Một lần nữa cảm ơn các bạn đã dành chút thời gian
+                        để nhìn lại cùng mình về hành trình này!
+                      </li>
+                    </>
+                  )}
                 </ol>
 
                 {/* <!--/ Post Content--> */}
@@ -108,7 +154,6 @@ const SingleBlog = () => {
 
           {/* <!--   Scroll Top Button  --> */}
           <ButtonScrollToTop />
-          {/* <PopularBlog currentVideoId={id} tags={category} /> */}
         </div>
       ) : (
         <div>No any information</div>

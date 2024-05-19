@@ -20,10 +20,12 @@ const CarouselNavigation = () => {
   return (
     <>
       {isLoading ? (
-        <LoadingSpinner />
+        <div className="flex items-center justify-center mx-auto pt-16">
+          <LoadingSpinner />
+        </div>
       ) : !isError && greetImages && greetImages.length > 0 ? (
         <Carousel
-          className="h-[500px]"
+          className="h-[550px]"
           navigation={({ setActiveIndex, activeIndex, length }) => (
             <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
               {new Array(length).fill("").map((_, i) => (
@@ -40,9 +42,10 @@ const CarouselNavigation = () => {
         >
           <div className="relative h-full w-full">
             <img
-              src={greetImages[2]?.image_path_url}
+              src={greetImages[1]?.image_path_url}
               alt="image 1"
               className="h-full w-full object-cover"
+              loading="lazy"
             />
             <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/50">
               <div className="w-3/4 text-center md:w-2/4">
@@ -61,16 +64,17 @@ const CarouselNavigation = () => {
           </div>
           <div className="relative h-full w-full">
             <img
-              src={greetImages[5]?.image_path_url}
+              src={greetImages[2]?.image_path_url}
               alt="image 2"
               className="h-full w-full object-cover"
               style={{
-                objectPosition: "center bottom",
+                objectPosition: "center",
               }}
+              loading="lazy"
             />
             <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/50">
               <div className="w-3/4 text-center md:w-2/4">
-                <Typography variant="h4" color="white" className="opacity-80">
+                <Typography variant="h4" color="white" className="opacity-100">
                   Nếu bạn có chút thời gian hãy cùng nhau khám phá một phần cuộc
                   sống với nhiều điều thú vị của tôi nhé
                 </Typography>

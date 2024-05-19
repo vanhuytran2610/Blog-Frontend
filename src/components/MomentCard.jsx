@@ -20,11 +20,14 @@ const MomentCard = () => {
   return (
     <>
       {isLoading ? (
-        <LoadingSpinner />
+        <div className="flex items-center justify-center mx-auto">
+          <LoadingSpinner />
+        </div>
       ) : !isError && momentImages && momentImages.length > 0 ? (
         <img
           src={momentImages[0]?.image_path_url}
           className="h-96 w-full rounded-t py-6"
+          loading="lazy"
         />
       ) : (
         <div>No image found</div>

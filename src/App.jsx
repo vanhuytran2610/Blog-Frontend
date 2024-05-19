@@ -20,7 +20,7 @@ function App() {
         <div className="max-w-screen-xl mx-auto px-5">
           <Footer />
         </div>
-        <div className="max-w-screen mx-auto bg-gray-400 text-black-100 h-10">
+        <div className="max-w-screen mx-auto bg-gray-400 text-black-100 h-15 md:h-10">
           <div className="max-w-screen-xl mx-auto text-center">
             <span className="inline-block align-middle font-bold px-9 py-2">
               © 2024 by Tran Van Huy. Powered and secured by @TVH

@@ -18,11 +18,14 @@ const MusicCard = () => {
   return (
     <>
       {isLoading ? (
-        <LoadingSpinner />
+        <div className="flex items-center justify-center mx-auto">
+          <LoadingSpinner />
+        </div>
       ) : !isError && musicImages && musicImages.length > 0 ? (
         <img
           src={musicImages[0]?.image_path_url}
-          className="h-56 w-72 rounded-md"
+          className="h-52 w-72"
+          loading="lazy"
         />
       ) : (
         <div>No image found</div>

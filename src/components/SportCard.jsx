@@ -15,11 +15,13 @@ const SportCard = () => {
     dispatch(getExtraImg());
   }, [dispatch]);
 
-  const sportImages = extraImg.data?.filter((item) => item.category_id === 5);
+  const sportImages = extraImg.data?.filter((item) => item.category_id === 3);
   return (
     <>
       {isLoading ? (
-        <LoadingSpinner />
+        <div className="flex items-center justify-center mx-auto">
+          <LoadingSpinner />
+        </div>
       ) : !isError && sportImages && sportImages?.length > 0 ? (
         <div className="py-3 px-3 grid grid-cols-3 grid-rows-2 gap-y-2">
           {sportImages?.map((image, index) => (
@@ -28,6 +30,7 @@ const SportCard = () => {
                 src={image.image_path_url}
                 className="object-cover h-36 w-36"
                 alt={`Image ${index}`}
+                loading="lazy"
               />
             </div>
           ))}

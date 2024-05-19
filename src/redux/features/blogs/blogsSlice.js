@@ -9,18 +9,10 @@ const initialState = {
   error: "",
 };
 
-export const getAllBlogs = createAsyncThunk(
-  "blogs/getAllBlogs",
-  async ({ orderBy, orderSort }) => {
-    try {
-      const blogs = await getBlogs({ orderBy, orderSort });
-      return blogs;
-    } catch (error) {
-      // Handle error
-      console.log(error.message); // Pass error message to the reducer
-    }
-  }
-);
+export const getAllBlogs = createAsyncThunk("blogs/getAllBlogs", async () => {
+  const blogs = await getBlogs();
+  return blogs;
+});
 
 const blogsSlice = createSlice({
   name: "blogs",
