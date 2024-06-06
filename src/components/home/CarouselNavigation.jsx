@@ -2,14 +2,15 @@ import { Carousel, Typography } from "@material-tailwind/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import LoadingSpinner from "../../components/LoadingSpinner";
+import LoadingSpinner from "../../layouts/LoadingSpinner";
 import { getExtraImg } from "../../redux/features/extraImages/extraImgSlice";
+import { useTranslation } from "react-i18next";
 
 const CarouselNavigation = () => {
   const { extraImg, isLoading, isError, error } = useSelector(
     (state) => state.extraImg
   );
-
+  const {t} = useTranslation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,10 +55,10 @@ const CarouselNavigation = () => {
                   color="white"
                   className="mb-4 text-3xl md:text-4xl lg:text-5xl"
                 >
-                  Hello World
+                  {t("home.carousel.title_1")}
                 </Typography>
                 <Typography variant="h4" color="white" className="opacity-80">
-                  Tôi là Huy! Chào mừng mọi người đến với thế giới của tôi!
+                  {t("home.carousel.des_1")}
                 </Typography>
               </div>
             </div>
@@ -75,8 +76,7 @@ const CarouselNavigation = () => {
             <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/50">
               <div className="w-3/4 text-center md:w-2/4">
                 <Typography variant="h4" color="white" className="opacity-100">
-                  Nếu bạn có chút thời gian hãy cùng nhau khám phá một phần cuộc
-                  sống với nhiều điều thú vị của tôi nhé
+                  {t("home.carousel.des_2")}
                 </Typography>
               </div>
             </div>
@@ -108,10 +108,10 @@ const CarouselNavigation = () => {
                   color="white"
                   className="mb-4 text-3xl md:text-4xl lg:text-5xl"
                 >
-                  Hello World
+                  {t("home.carousel.title_1")}
                 </Typography>
                 <Typography variant="h4" color="white" className="opacity-80">
-                  Tôi là Huy! Chào mừng mọi người đến với thế giới của tôi!
+                  {t("home.carousel.des_1")}
                 </Typography>
               </div>
             </div>
@@ -128,8 +128,7 @@ const CarouselNavigation = () => {
             <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/50">
               <div className="w-3/4 text-center md:w-2/4">
                 <Typography variant="h4" color="white" className="opacity-80">
-                  Nếu bạn có chút thời gian hãy cùng nhau khám phá một phần cuộc
-                  sống với nhiều điều thú vị của tôi nhé
+                  {t("home.carousel.des_2")}
                 </Typography>
               </div>
             </div>

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import ButtonScrollToTop from "../../components/ButtonScrollToTop";
-import CardVertical from "./CardVertical";
+import ButtonScrollToTop from "../../layouts/ButtonScrollToTop";
+import CardVertical from "../../layouts/CardVertical";
 import { getBlogsByCategoryId } from "../../redux/features/blogsByCategory/blogsByCategorySlice";
 import { useParams } from "react-router-dom";
-import LoadingSpinner from "../../components/LoadingSpinner";
+import LoadingSpinner from "../../layouts/LoadingSpinner";
+import NoBlogs from "../notFound/NoBlogs";
+import { useTranslation } from "react-i18next";
 
-const SportPostCards = () => {
+const MusicPostCards = () => {
   const { blogsByCategory, isLoading, isError, error } = useSelector(
     (state) => state.blogsByCategory
   );
@@ -16,6 +18,8 @@ const SportPostCards = () => {
   const { categoryId } = useParams();
   const dispatch = useDispatch();
   const [visibleBlogs, setVisibleBlogs] = useState(6);
+  const { t } = useTranslation();
+  const language = useSelector((state) => state.language);
 
   useEffect(() => {
     dispatch(
@@ -23,9 +27,10 @@ const SportPostCards = () => {
         categoryId: categoryId,
         sortBy: sortBy,
         sortOrder: sortOrder,
+        language: language,
       })
     );
-  }, [dispatch, categoryId, sortBy, sortOrder]);
+  }, [dispatch, categoryId, sortBy, sortOrder, language]);
 
   const handleSortByChange = (e) => {
     setSortBy(e.target.value);
@@ -39,56 +44,60 @@ const SportPostCards = () => {
     setVisibleBlogs((prev) => prev + 6);
   };
 
+  useEffect(() => {
+    document.title = t("music.title_page");
+  }, [t]);
+
   return (
     <div className="px-5 max-w-screen-xl mx-auto">
       <div className="mx-2 pt-32">
-        <div className="md:mt-0 text-gray-700 font-bold text-5xl mx-3 mb-5 capitalize">
-          Thế giới thể thao của tôi
+        <div className="md:mt-0 text-gray-700 font-bold text-5xl mx-3 mb-6 capitalize">
+          {t("music.title")}
         </div>
-        <div className="mx-3 py-5 text-gray-800 font-bold text-md justify-stretch">
+        <div className="mx-3 py-5 text-gray-600 text-md justify-stretch">
           <div>
             <label>
-              Sắp xếp:
+              {t("sort")}
               <select
                 value={sortBy}
                 onChange={handleSortByChange}
-                className="bg-gray-300 mx-2 border border-gray-800 w-56 p-1"
+                className="bg-white mx-2 border border-gray-800 w-56 p-1"
               >
-                <option value="updated_at">Ngày phát hành</option>
-                <option value="title">Tiêu đề</option>
+                <option value="updated_at">{t("sort_updated_at")}</option>
+                <option value="title">{t("sort_title")}</option>
               </select>
             </label>
             <label className="mx-3">
-              Theo:
+              {t("by")}
               <select
                 value={sortOrder}
                 onChange={handleSortOrderChange}
-                className="bg-gray-300 mx-2 border border-gray-800 w-56 p-1"
+                className="bg-white mx-2 border border-gray-800 w-56 p-1"
               >
                 {sortBy === "title" ? (
                   <>
-                    <option value="asc">Từ A đến Z</option>
-                    <option value="desc">Từ Z đến A</option>
+                    <option value="asc">{t("a_to_z")}</option>
+                    <option value="desc">{t("z_to_a")}</option>
                   </>
                 ) : (
                   <>
-                    <option value="desc">Mới nhất</option>
-                    <option value="asc">Cũ nhất</option>
+                    <option value="desc">{t("newest")}</option>
+                    <option value="asc">{t("oldest")}</option>
                   </>
                 )}
               </select>
             </label>
           </div>
         </div>
-        <hr className="border-gray-300 border-2" />
+        <hr className="border-gray-500 border-2 mt-4" />
       </div>
       <div className="container px-6 pt-10 w-full lg:w-full">
-        <div className="md:flex flex-wrap -mx-2">
-          {isLoading ? (
-            <div className="flex items-center justify-center mx-auto">
-              <LoadingSpinner />
-            </div>
-          ) : !isError && blogsByCategory.data?.blogs?.length > 0 ? (
+        {isLoading ? (
+          <div className="flex items-center justify-center mx-auto">
+            <LoadingSpinner />
+          </div>
+        ) : !isError && blogsByCategory.data?.blogs?.length > 0 ? (
+          <div className="md:flex flex-wrap">
             <div className="md:flex">
               {blogsByCategory.data?.blogs
                 ?.slice(0, visibleBlogs)
@@ -100,17 +109,18 @@ const SportPostCards = () => {
                   />
                 ))}
             </div>
-          ) : (
-            <div>No blogs found</div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <NoBlogs />
+        )}
+
         {!isLoading && blogsByCategory.data?.blogs?.length > visibleBlogs && (
           <div className="flex justify-center mt-5">
             <button
               onClick={handleSeeMore}
               className="bg-gray-300 text-gray-800 font-bold px-4 py-2"
             >
-              Xem thêm
+              {t("home.load_more")}
             </button>
           </div>
         )}
@@ -120,4 +130,4 @@ const SportPostCards = () => {
   );
 };
 
-export default SportPostCards;
+export default MusicPostCards;

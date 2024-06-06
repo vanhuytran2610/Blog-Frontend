@@ -1,4 +1,4 @@
-import publicAxios from "../../../components/publicAxios";
+import publicAxios from "../../publicAxios";
 
 export const getExtraImage = async () => {
   try {

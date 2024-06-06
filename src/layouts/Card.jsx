@@ -1,14 +1,18 @@
 /* eslint-disable react/prop-types */
 
-import Avatar from "../../components/Avatar";
+import Avatar from "./Avatar";
 import { Link } from "react-router-dom";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Card = ({ blog }) => {
   const published_date = new Date(blog.updated_at);
   const options = { year: "numeric", month: "long", day: "numeric" };
+  const language = useSelector((state) => state.language);
 
-  const formattedDate = published_date.toLocaleDateString("vi-VN", options);
+  const formattedDate_vi = published_date.toLocaleDateString("vi-VN", options);
+  const formattedDate_en = published_date.toLocaleDateString("en-US", options);
+
   return (
     <Link
       className="rounded w-full flex"
@@ -25,7 +29,9 @@ const Card = ({ blog }) => {
           <p className="-mt-1 text-gray-700 hover:text-green-600 font-bold text-md mb-1 text-justify mr-3 h-12 line-clamp-2">
             {blog.title}
           </p>
-          <p className="text-gray-600 text-xs">{formattedDate}</p>
+          <p className="text-gray-600 text-xs">
+            {language === "en" ? formattedDate_en : formattedDate_vi}
+          </p>
         </div>
       </div>
     </Link>

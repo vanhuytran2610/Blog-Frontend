@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
-import ButtonScrollToTop from "../../components/ButtonScrollToTop";
-import Avatar from "../../components/Avatar";
-import LoadingSpinner from "../../components/LoadingSpinner";
+import ButtonScrollToTop from "../../layouts/ButtonScrollToTop";
+import Avatar from "../../layouts/Avatar";
+import LoadingSpinner from "../../layouts/LoadingSpinner";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlogById } from "../../redux/features/singleBlog/blogSlice";
+import NotFound from "../notFound/NotFound";
+import { useTranslation } from "react-i18next";
 
 const SingleAboutMe = () => {
   const { categoryId } = useParams();
+  const { t } = useTranslation();
+  const language = useSelector((state) => state.language);
 
   const { blog, isLoading, isError, error } = useSelector(
     (state) => state.blog
@@ -15,8 +19,14 @@ const SingleAboutMe = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getBlogById({ categoryId: categoryId, id: 5 }));
-  }, [dispatch, categoryId]);
+    dispatch(
+      getBlogById({ categoryId: categoryId, id: 5, language: language })
+    );
+  }, [dispatch, categoryId, language]);
+
+  useEffect(() => {
+    document.title = t("about_me.title_page");
+  }, [t]);
 
   return (
     <article className="pt-36 pb-10">
@@ -62,7 +72,7 @@ const SingleAboutMe = () => {
           <ButtonScrollToTop />
         </div>
       ) : (
-        <div>No any information</div>
+        <NotFound />
       )}
     </article>
   );

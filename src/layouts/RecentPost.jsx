@@ -5,24 +5,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllBlogs } from "../redux/features/blogs/blogsSlice";
 import LoadingSpinner from "./LoadingSpinner";
-import Card from "../pages/blogs/Card";
+import Card from "./Card";
+import { useTranslation } from "react-i18next";
 
 const RecentPost = () => {
   const { blogs, isLoading, isError, error } = useSelector(
     (state) => state.blogs
   );
+  const { t } = useTranslation();
+  const language = useSelector((state) => state.language);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllBlogs({ orderBy: "title", orderSort: "asc" }));
-  }, [dispatch]);
+    dispatch(
+      getAllBlogs({
+        language: language,
+      })
+    );
+  }, [dispatch, language]);
 
   return (
     <div className="flex-1 bg-white border-gray-400 border overflow-hidden shadow-lg">
       <div className="flex flex-wrap no-underline hover:no-underline">
         <div className="w-full font-bold text-2xl text-gray-900 text-center mt-6 mb-8">
-          Recent Post
+          {t("home.recent_title")}
         </div>
         <div className="mx-11 pt-1 pb-6 w-full">
           {isLoading ? (
@@ -50,7 +57,7 @@ const RecentPost = () => {
                 ))}
             </>
           ) : (
-            <div>No blogs found</div>
+            <div>{t("home.recent_no_blog")}</div>
           )}
         </div>
       </div>

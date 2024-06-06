@@ -1,14 +1,18 @@
 /* eslint-disable react/prop-types */
 
-import Avatar from "../../components/Avatar";
+import Avatar from "./Avatar";
 import { Link } from "react-router-dom";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const CardVertical = ({ blog, categoryId }) => {
   const published_date = new Date(blog?.updated_at);
   const options = { year: "numeric", month: "long", day: "numeric" };
+  const language = useSelector((state) => state.language);
 
-  const formattedDate = published_date.toLocaleDateString("vi-VN", options);
+  const formattedDate_vi = published_date.toLocaleDateString("vi-VN", options);
+  const formattedDate_en = published_date.toLocaleDateString("en-US", options);
+
   return (
     <div className="w-full md:w-1/3 border-gray-400 border bg-white hover:bg-gray-50 mb-5 mx-2">
       <Link to={`/${categoryId}/${blog.id}`} className="space-y-3">
@@ -36,7 +40,9 @@ const CardVertical = ({ blog, categoryId }) => {
                 {" "}
                 Tran Van Huy{" "}
               </p>
-              <p className="text-gray-600 text-xs">{formattedDate}</p>
+              <p className="text-gray-600 text-xs">
+                {language === "en" ? formattedDate_en : formattedDate_vi}
+              </p>
             </div>
           </div>
         </div>

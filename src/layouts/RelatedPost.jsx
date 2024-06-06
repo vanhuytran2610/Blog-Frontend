@@ -5,17 +5,22 @@ import { useDispatch, useSelector } from "react-redux";
 
 import LoadingSpinner from "./LoadingSpinner";
 import { getBlogsExceptCurr } from "../redux/features/blogsExceptCurrent/blogsExceptCurrSlice";
-import CardRelatedPost from "../pages/blogs/CardRelatedPost";
-import Card from "../pages/blogs/Card";
+import CardRelatedPost from "./CardRelatedPost";
+import Card from "./Card";
+import { useTranslation } from "react-i18next";
 
 const RelatedPost = ({ categoryId, id }) => {
   const { blogsExceptCurr, isLoading, isError, error } = useSelector(
     (state) => state.blogsExceptCurr
   );
+  const language = useSelector((state) => state.language);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getBlogsExceptCurr({ categoryId: categoryId, id: id }));
-  }, [dispatch, categoryId, id]);
+    dispatch(
+      getBlogsExceptCurr({ categoryId: categoryId, id: id, language: language })
+    );
+  }, [dispatch, categoryId, id, language]);
 
   const slideLeft = () => {
     var slider = document.getElementById("scrollContainer");
@@ -26,8 +31,6 @@ const RelatedPost = ({ categoryId, id }) => {
     var slider = document.getElementById("scrollContainer");
     slider.scrollLeft = slider.scrollLeft + 500;
   };
-
-  console.log(blogsExceptCurr.data);
 
   return (
     <>
@@ -49,7 +52,7 @@ const RelatedPost = ({ categoryId, id }) => {
               ))}
             </div>
           ) : (
-            <div>No blogs found</div>
+            <div>{t("home.recent_no_blog")}</div>
           )}
         </div>
       ) : (
@@ -78,7 +81,7 @@ const RelatedPost = ({ categoryId, id }) => {
                 ))}
               </>
             ) : (
-              <div>No blogs found</div>
+              <div>{t("home.recent_no_blog")}</div>
             )}
           </div>
           <MdChevronRight

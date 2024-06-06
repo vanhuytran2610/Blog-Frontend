@@ -11,8 +11,12 @@ const initialState = {
 
 export const getBlogById = createAsyncThunk(
   "blogs/getBlogById",
-  async ({ categoryId, id }) => {
-    const blog = await getBlog({categoryId: categoryId, id: id});
+  async ({ categoryId, id, language }) => {
+    const blog = await getBlog({
+      categoryId: categoryId,
+      id: id,
+      language: language,
+    });
     return blog;
   }
 );

@@ -16,8 +16,10 @@ import {
   PopoverHandler,
 } from "@material-tailwind/react";
 import { MdOutlineCancel } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchBlog } from "../redux/features/searchBlogs/searchBlogsSlice";
+import { useTranslation } from "react-i18next";
+import { setLanguage } from "../redux/features/languages/languageSlice";
 
 const Navbar = () => {
   const aboutMeId = 1;
@@ -29,6 +31,14 @@ const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const language = useSelector((state) => state.language);
+
+  const handleChangeLanguage = (event) => {
+    const newLanguage = event.target.value;
+    dispatch(setLanguage(newLanguage));
+    i18n.changeLanguage(newLanguage);
+  };
 
   const toggleMobileMenu = () => {
     setIsOpenMenu(!isOpenMenu);
@@ -77,7 +87,7 @@ const Navbar = () => {
                 activeLink === "home" ? "green-600" : "gray-700"
               } hover:text-green-600 text-base mb-2`}
             >
-              Trang chủ
+              {t("head.homepage")}
             </Link>
             <Link
               to={`about-me/${aboutMeId}`}
@@ -86,7 +96,7 @@ const Navbar = () => {
                 activeLink === "about-me" ? "green-600" : "gray-700"
               } hover:text-green-600 text-base mb-2`}
             >
-              Giới thiệu
+              {t("head.greet")}
             </Link>
             <Link
               to={`moment/${momentId}`}
@@ -95,7 +105,7 @@ const Navbar = () => {
                 activeLink === "moment" ? "green-600" : "gray-700"
               } hover:text-green-600 text-base mb-2`}
             >
-              Khoảnh khắc
+              {t("head.moment")}
             </Link>
             <Link
               to={`sport/${sportId}`}
@@ -104,7 +114,7 @@ const Navbar = () => {
                 activeLink === "sport" ? "green-600" : "gray-700"
               } hover:text-green-600 text-base mb-2`}
             >
-              Thể thao
+              {t("head.sport")}
             </Link>
             <Link
               to={`music/${musicId}`}
@@ -113,22 +123,28 @@ const Navbar = () => {
                 activeLink === "music" ? "green-600" : "gray-700"
               } hover:text-green-600 text-base mb-2`}
             >
-              Âm nhạc
+              {t("head.music")}
             </Link>
             <div className="flex">
               <input
                 type="text"
                 id="header-searchbox"
                 name="q"
-                placeholder="Tìm kiếm ..."
-                className="search-input w-4/5 mt-2 mb-4 bg-slate-200 border border-transparent focus:bg-white focus:border-slate-300 focus:outline-none h-8 p-2 placeholder-slate-500 text-slate-700 text-sm"
+                placeholder={t("head.search")}
+                className="search-input w-5/6 mt-2 mb-4 bg-slate-200 border border-transparent focus:bg-white focus:border-slate-300 focus:outline-none h-8 p-2 placeholder-slate-500 text-slate-700 text-sm"
                 value={searchTerm}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyPress}
               />
-              <div className="flex w-1/5 mx-1 my-3 justify-end">
-                <TbWorld size={22} />
-                <p className="font-bold ml-1 text-md">VI</p>
+              <div className="flex w-2/6 ml-2 justify-end text-gray-700 hover:text-green-600">
+                <select
+                  value={language}
+                  onChange={handleChangeLanguage}
+                  className="ml-2 border mt-2 border-gray-700 h-8"
+                >
+                  <option value="vi">VIE</option>
+                  <option value="en">ENG</option>
+                </select>
               </div>
             </div>
           </nav>
@@ -142,7 +158,7 @@ const Navbar = () => {
             } hover:text-green-600 text-base mr-4`}
           >
             {" "}
-            Trang chủ{" "}
+            {t("head.homepage")}{" "}
           </Link>
           <Link
             to={`about-me/${aboutMeId}`}
@@ -151,7 +167,7 @@ const Navbar = () => {
               activeLink === "about-me" ? "green-600" : "gray-700"
             } hover:text-green-600 text-base mr-4`}
           >
-            Giới thiệu
+            {t("head.greet")}
           </Link>
           <Link
             to={`moment/${momentId}`}
@@ -161,7 +177,7 @@ const Navbar = () => {
             } hover:text-green-600 text-base mr-4`}
           >
             {" "}
-            Khoảnh khắc{" "}
+            {t("head.moment")}{" "}
           </Link>
           <Link
             to={`sport/${sportId}`}
@@ -171,7 +187,7 @@ const Navbar = () => {
             } hover:text-green-600 text-base mr-4`}
           >
             {" "}
-            Thể thao{" "}
+            {t("head.sport")}{" "}
           </Link>
           <Link
             to={`music/${musicId}`}
@@ -181,7 +197,7 @@ const Navbar = () => {
             } hover:text-green-600 text-base mr-4`}
           >
             {" "}
-            Âm nhạc{" "}
+            {t("head.music")}{" "}
           </Link>
         </nav>
         <div className="order-last md:order-none items-center justify-end w-1/6 mr-1 md:flex hidden pt-7 md:mt-0">
@@ -189,8 +205,7 @@ const Navbar = () => {
             <PopoverHandler>
               <button>
                 <div className="flex text-gray-700 hover:text-green-600">
-                  <p className="mx-2 font-medium">Tìm kiếm</p>
-                  <FaSearch className="mt-1" />
+                  <FaSearch className="mt-1" size={16} />
                 </div>
               </button>
             </PopoverHandler>
@@ -200,7 +215,7 @@ const Navbar = () => {
                   type="text"
                   id="header-searchbox"
                   name="q"
-                  placeholder="Tìm kiếm ..."
+                  placeholder={t("head.search")}
                   className="w-full bg-slate-100 border border-transparent focus:bg-white focus:border-slate-300 focus:outline-none h-8 p-2 placeholder-slate-500 text-slate-700 text-sm"
                   value={searchTerm}
                   onChange={handleInputChange}
@@ -209,6 +224,16 @@ const Navbar = () => {
               </div>
             </PopoverContent>
           </Popover>
+          <div className="flex justify-end ml-2 text-gray-700 hover:text-green-600">
+            <select
+              value={language}
+              onChange={handleChangeLanguage}
+              className="border ml-1 border-gray-700 h-8"
+            >
+              <option value="vi">VIE</option>
+              <option value="en">ENG</option>
+            </select>
+          </div>
         </div>
       </div>
     </header>

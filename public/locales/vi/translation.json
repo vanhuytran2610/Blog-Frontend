@@ -1,0 +1,73 @@
+{
+    "head": {
+        "homepage": "Trang chủ",
+        "greet": "Giới thiệu",
+        "moment": "Khoảnh khắc",
+        "sport": "Thể thao",
+        "music": "Âm nhạc",
+        "search": "Tìm kiếm..."
+    },
+    "home": {
+        "title_page": "TRANG CHỦ",
+        "carousel": {
+            "title_1": "Hello World",
+            "des_1": "Tôi là Huy! Chào mừng mọi người đến với thế giới của tôi!",
+            "des_2": "Nếu bạn có chút thời gian hãy cùng nhau khám phá một phần cuộc sống với nhiều điều thú vị của tôi nhé"
+        },
+        "load_more": "Xem thêm",
+        "moment": "Khoảnh khắc",
+        "sport": "Thể thao",
+        "music": "Âm nhạc",
+        "music_title": "Tran Van Huy - Âm Nhạc Của Huy (Official Video)",
+        "about_me_title": "Xin chào! Tôi là Huy!",
+        "about_me_des": "Chào mọi người! Tôi là Huy, người đứng sau những dòng chữ ở đây. Chào mừng các bạn đến với thế giới nhỏ của tôi!",
+        "recent_title": "Blog Gần Đây",
+        "recent_no_blog": "Không tìm thấy blog nào",
+        "footer_thanks": "Cảm ơn",
+        "footer_thanks_content": "Huy xin gửi đến tất cả mọi người, bao gồm gia đình, bạn bè, người thân và những bạn Huy chưa từng gặp, một lời cảm ơn chân thành vì đã dành ra một phần nhỏ thời gian của mình để khám phá một phần nhỏ thế giới của Huy.",
+        "footer_thanks_contact": "Mọi người muốn biết nhiều điều hơn về Huy có thể tìm kiếm qua các trang Mạng Xã Hội của Huy.",
+        "footer_social": "Mạng Xã Hội"
+    },
+    "about_me": {
+        "title_page": "GIỚI THIỆU"
+    },
+    "moment": {
+        "title_page": "KHOẢNH KHẮC",
+        "title": "Khoảnh khắc cuộc sống"
+    },
+    "music": {
+        "title_page": "ÂM NHẠC",
+        "title": "Âm nhạc"
+    },
+    "sport": {
+        "title_page": "THỂ THAO",
+        "title": "Thể thao"
+    },
+    "sort": "Sắp xếp",
+    "sort_updated_at": "Ngày phát hành",
+    "sort_title": "Tiêu đề",
+    "by": "Theo",
+    "a_to_z": "Từ A đến Z",
+    "z_to_a": "Từ Z đến A",
+    "newest": "Mới nhất",
+    "oldest": "Cũ nhất",
+    "back": "Quay lại",
+    "noBlogs": {
+        "title": "Không tìm thấy blog nào"
+    },
+    "notFound": {
+        "title_page": "404 - KHÔNG TÌM THẤY TRANG",
+        "content_1": "Không tìm thấy trang",
+        "content_2": "Vui lòng thử lại."
+    },
+    "detail": {
+        "date": "Phát hành vào ",
+        "badminton_content": {
+            "head": "Các bạn có thể xem thêm các video về cầu lông ",
+            "link": "tại đây",
+            "foot": "! Một lần nữa cảm ơn các bạn đã dành chút thời gian để nhìn lại cùng mình về hành trình này!"
+        },
+        "relate_post": "Blog Tương Tự",
+        "subscriber": "Người Đăng Ký"
+    }
+}

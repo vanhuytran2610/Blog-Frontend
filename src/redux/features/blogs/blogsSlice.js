@@ -9,10 +9,15 @@ const initialState = {
   error: "",
 };
 
-export const getAllBlogs = createAsyncThunk("blogs/getAllBlogs", async () => {
-  const blogs = await getBlogs();
-  return blogs;
-});
+export const getAllBlogs = createAsyncThunk(
+  "blogs/getAllBlogs",
+  async ({ language }) => {
+    const blogs = await getBlogs({
+      language: language,
+    });
+    return blogs;
+  }
+);
 
 const blogsSlice = createSlice({
   name: "blogs",

@@ -3,13 +3,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Avatar from "../../components/Avatar";
-import ButtonScrollToTop from "../../components/ButtonScrollToTop";
-import LoadingSpinner from "../../components/LoadingSpinner";
-import RelatedPost from "../../components/RelatedPost";
+import Avatar from "../../layouts/Avatar";
+import ButtonScrollToTop from "../../layouts/ButtonScrollToTop";
+import LoadingSpinner from "../../layouts/LoadingSpinner";
+import RelatedPost from "../../layouts/RelatedPost";
 import { getBlogById } from "../../redux/features/singleBlog/blogSlice";
 import { Link, useParams } from "react-router-dom";
-import YoutubeCard from "../../components/YoutubeCard";
+import YoutubeCard from "../../layouts/YoutubeCard";
+import NotFound from "../notFound/NotFound";
+import { useTranslation } from "react-i18next";
 
 const SingleBlog = () => {
   const { categoryId, id } = useParams();
@@ -17,16 +19,24 @@ const SingleBlog = () => {
   const { blog, isLoading, isError, error } = useSelector(
     (state) => state.blog
   );
-
+  const { t } = useTranslation();
+  const language = useSelector((state) => state.language);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getBlogById({ categoryId: categoryId, id: id }));
-  }, [dispatch, categoryId, id]);
+    dispatch(
+      getBlogById({ categoryId: categoryId, id: id, language: language })
+    );
+  }, [dispatch, categoryId, id, language]);
+
+  useEffect(() => {
+    document.title = blog.data?.title.toUpperCase();
+  }, [blog]);
 
   const published_date = new Date(blog?.data?.updated_at);
   const options = { year: "numeric", month: "long", day: "numeric" };
 
-  const formattedDate = published_date.toLocaleDateString("vi-VN", options);
+  const formattedDate_vi = published_date.toLocaleDateString("vi-VN", options);
+  const formattedDate_en = published_date.toLocaleDateString("en-US", options);
 
   return (
     <article className="pt-36">
@@ -46,7 +56,8 @@ const SingleBlog = () => {
               Tran Van Huy{" "}
             </p>
             <p className="text-lg md:text-xl text-green-600 font-bold mb-7">
-              Published on {formattedDate}
+              {t("detail.date")}
+              {language === "vi" ? formattedDate_vi : formattedDate_en}
             </p>
             <h2 className="font-bold break-normal text-3xl md:text-5xl capitalize">
               {blog.data?.title}
@@ -123,22 +134,22 @@ const SingleBlog = () => {
                         </React.Fragment>
                       ))}
                   </li>
-                  {blog.data?.title?.toLowerCase().includes("cầu lông") && (
+                  {(blog.data?.title?.toLowerCase().includes("cầu lông") ||
+                    blog.data?.title?.toLowerCase().includes("badminton")) && (
                     <>
                       <li className="pb-6 h-96 md:h-[500px]">
                         <YoutubeCard video_url={blog.data?.video_url} />
                       </li>
                       <li className="">
-                        Các bạn có thể xem thêm các video về cầu lông{" "}
+                        {t("detail.badminton_content.head")}
                         <Link
                           to="https://youtube.com/playlist?list=PLa4S6u0VM2JI7U5ES-_VZ5EFhq9oDxsdD&si=1nvNRnuhVC7kOow0"
                           className="border-b-2 border-gray-900 hover:border-green-600 hover:text-green-600 font-bold"
                           target="_blank"
                         >
-                          tại đây
+                          {t("detail.badminton_content.link")}
                         </Link>{" "}
-                        nhé! Một lần nữa cảm ơn các bạn đã dành chút thời gian
-                        để nhìn lại cùng mình về hành trình này!
+                        {t("detail.badminton_content.foot")}
                       </li>
                     </>
                   )}
@@ -156,7 +167,7 @@ const SingleBlog = () => {
           <ButtonScrollToTop />
         </div>
       ) : (
-        <div>No any information</div>
+        <NotFound />
       )}
     </article>
   );

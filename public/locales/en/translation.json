@@ -1,0 +1,73 @@
+{
+    "head": {
+        "homepage": "Home",
+        "greet": "About Me",
+        "moment": "Moment",
+        "sport": "Sport",
+        "music": "Music",
+        "search": "Search..."
+    },
+    "home": {
+        "title_page": "HOME",
+        "carousel": {
+            "title_1": "Hello World",
+            "des_1": "My name is Huy! Welcome to My World!",
+            "des_2": "If you have some time, let's explore a part of my life with many interesting things together"
+        },
+        "load_more": "Load more",
+        "moment": "Moment",
+        "sport": "Sport",
+        "music": "Music",
+        "music_title": "Tran Van Huy - Huy's Music (Official Video)",
+        "about_me_title": "Hi! I am Huy!",
+        "about_me_des": "Hi everybody! I am Huy, the person behind the words here. Welcome to my small world!",
+        "recent_title": "Recent Post",
+        "recent_no_blog": "No Blogs Found",
+        "footer_thanks": "Thank you",
+        "footer_thanks_content": "Huy would like to send everyone, including family, friends, relatives and people Huy has never met, a sincere thank you for spending a small part of your time to explore a small part of the world. Huy's world.",
+        "footer_thanks_contact": "People who want to know more about Huy can search through Huy's Social Network pages.",
+        "footer_social": "Social Network"
+    },
+    "about_me": {
+        "title_page": "ABOUT ME"
+    },
+    "moment": {
+        "title_page": "MOMENT",
+        "title": "Life Moment"
+    },
+    "music": {
+        "title_page": "MUSIC",
+        "title": "Music"
+    },
+    "sport": {
+        "title_page": "SPORT",
+        "title": "Sport"
+    },
+    "sort": "Sort",
+    "sort_updated_at": "Published Date",
+    "sort_title": "Title",
+    "by": "By",
+    "a_to_z": "From A to Z",
+    "z_to_a": "From Z to A",
+    "newest": "Newest",
+    "oldest": "Oldest",
+    "back": "Back",
+    "noBlogs": {
+        "title": "No Blogs Found"
+    },
+    "notFound": {
+        "title_page": "404 - NOT FOUND",
+        "content_1": "Page Not Found",
+        "content_2": "Please try again."
+    },
+    "detail": {
+        "date": "Published on ",
+        "badminton_content": {
+            "head": "You can watch more videos about badminton ",
+            "link": "here",
+            "foot": "! Once again, thank you for taking some time to look back with me on this journey!"
+        },
+        "relate_post": "Related Post",
+        "subscriber": "Subscriber"
+    }
+}

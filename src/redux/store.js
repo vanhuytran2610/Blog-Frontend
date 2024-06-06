@@ -5,6 +5,7 @@ import blogsReducer from "./features/blogs/blogsSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import extraImgReducer from "./features/extraImages/extraImgSlice";
 import blogsBySearchReducer from "./features/searchBlogs/searchBlogsSlice";
+import languageReducer from "./features/languages/languageSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     blogsExceptCurr: blogsExceptCurrReducer,
     extraImg: extraImgReducer,
     blogsBySearch: blogsBySearchReducer,
+    language: languageReducer,
   },
 });

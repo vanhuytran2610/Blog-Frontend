@@ -11,8 +11,12 @@ const initialState = {
 
 export const getBlogsExceptCurr = createAsyncThunk(
   "blogs/getBlogsExceptCurr",
-  async ({ categoryId, id }) => {
-    const blogs = await getBlogsExceptCurrent({categoryId: categoryId, id: id});
+  async ({ categoryId, id, language }) => {
+    const blogs = await getBlogsExceptCurrent({
+      categoryId: categoryId,
+      id: id,
+      language: language,
+    });
     return blogs;
   }
 );
@@ -23,7 +27,9 @@ const blogsExceptCurrSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getBlogsExceptCurr.pending, (state) => {
-        (state.isError = false), (state.isLoading = true), (state.blogsExceptCurr = []);
+        (state.isError = false),
+          (state.isLoading = true),
+          (state.blogsExceptCurr = []);
       })
       .addCase(getBlogsExceptCurr.fulfilled, (state, action) => {
         (state.isLoading = false), (state.blogsExceptCurr = action.payload);

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Card from "./Card";
+import Card from "../../layouts/Card";
 import { getAllBlogs } from "../../redux/features/blogs/blogsSlice";
 
 const PostCards = () => {

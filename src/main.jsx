@@ -2,17 +2,19 @@
 import { RouterProvider, createBrowserRouter, useParams } from "react-router-dom";
 
 import App from "./App.jsx";
-import Home from "./pages/home/Home.jsx";
-import MomentPostCards from "./pages/blogs/MomentPostCards.jsx";
-import MusicPostCards from "./pages/blogs/MusicPostCards.jsx";
-import PostCards from "./pages/blogs/PostCards.jsx";
+import Home from "./components/home/Home.jsx";
+import MomentPostCards from "./components/blogs/MomentPostCards.jsx";
+import MusicPostCards from "./components/blogs/MusicPostCards.jsx";
+import PostCards from "./components/blogs/PostCards.jsx";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import SingleAboutMe from "./pages/singleBlog/SingleAboutMe.jsx";
-import SingleBlog from "./pages/singleBlog/SingleBlog.jsx";
-import SportPostCards from "./pages/blogs/SportPostCards.jsx";
-import SingleMusicBlog from "./pages/singleBlog/SingleMusicBlog.jsx";
-import SearchBlogs from "./pages/blogs/SearchBlogs.jsx";
+import SingleAboutMe from "./components/singleBlog/SingleAboutMe.jsx";
+import SingleBlog from "./components/singleBlog/SingleBlog.jsx";
+import SportPostCards from "./components/blogs/SportPostCards.jsx";
+import SingleMusicBlog from "./components/singleBlog/SingleMusicBlog.jsx";
+import SearchBlogs from "./components/blogs/SearchBlogs.jsx";
+import Login from "./authentications/Login.jsx";
+import NotFound from "./components/notFound/NotFound.jsx";
 
 function RenderBlogBasedOnCategory() {
   const { categoryId } = useParams();
@@ -42,10 +44,6 @@ const router = createBrowserRouter([
         element: <SingleAboutMe />
       },
       {
-        path: "/all-blogs",
-        element: <PostCards />
-      },
-      {
         path: "moment/:categoryId",
         element: <MomentPostCards />
       },
@@ -64,9 +62,13 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <SearchBlogs />
+      },
+      {
+        path: "*",
+        element: <NotFound />
       }
     ]
-  },
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

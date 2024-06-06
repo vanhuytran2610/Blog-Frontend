@@ -1,8 +1,12 @@
-import publicAxios from "../../../components/publicAxios";
+import publicAxios from "../../publicAxios";
 
-export const getBlog = async ({ categoryId, id }) => {
+export const getBlog = async ({ categoryId, id, language }) => {
   try {
-    const response = await publicAxios.get(`/get-blog/${categoryId}/${id}`);
+    const response = await publicAxios.get(`/get-blog/${categoryId}/${id}`,{
+      headers: {
+        "Accept-Language": language,
+      },
+    });
     return response.data;
   } catch (error) {
     // Handle error
